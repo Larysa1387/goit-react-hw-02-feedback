@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import Section from "components/Section";
 import FeedbackOptions from "components/FeedbackOptions";
-
-import "./App.css";
-
+import Statistics from "components/Statistics";
+import Notification from "components/Notification";
 class App extends Component {
   state = {
     good: 0,
@@ -12,13 +11,18 @@ class App extends Component {
   };
   onLeaveFeedback = (option) => {
     this.setState((prevState) => {
-      console.log(option);
       return { [option]: prevState[option] + 1 };
     });
   };
+  countTotalFeedback = (good, neutral, bad) => {
+    return good + neutral + bad;
+  };
+  countPositiveFeedbackPercentage = (good, neutral, bad) => {
+    return Math.round((good / (good + neutral + bad)) * 100);
+  };
 
   render() {
-    // const { good, neutral, bad } = this.state;
+    const { good, neutral, bad } = this.state;
     return (
       <>
         <Section title="Your feedback is very important for us!">
@@ -27,20 +31,22 @@ class App extends Component {
             onLeaveFeedback={this.onLeaveFeedback}
           />
         </Section>
-        {/* <Section>
-          <Statistics good={} neutral={} bad={} total={} positivePercentage={}/>
-        </Section> */}
+        <Section title="Statistics">
+          {good + neutral + bad !== 0 ? (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={this.countTotalFeedback}
+              positivePercentage={this.countPositiveFeedbackPercentage}
+            />
+          ) : (
+            <Notification message="No feedback given ^_^" />
+          )}
+        </Section>
       </>
     );
   }
 }
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <h1>Приветик</h1>
-//     </div>
-//   );
-// }
 
 export default App;
