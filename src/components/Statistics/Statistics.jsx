@@ -19,10 +19,10 @@ const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
 };
 
 Statistics.propType = {
-	good: PropTypes.number.isRequired,
-	neutral: PropTypes.number.isRequired,
-	bad: PropTypes.number.isRequired,
-	total: PropTypes.func.isRequired,
-	positivePercentage: PropTypes.func.isRequired,
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,
+  total: PropTypes.func.isRequired,
+  positivePercentage: PropTypes.func.isRequired,
 };
 export default Statistics;
